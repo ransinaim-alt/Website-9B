@@ -1,0 +1,663 @@
+<!DOCTYPE HTML>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Interaktif Kelas 9B</title>
+
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+    --bg-gradient: linear-gradient(-45deg, #4158D0, #C850C0, #FFCC70, #00DBDE);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: rgba(255, 255, 255, 0.5);
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --nav-bg: rgba(255, 255, 255, 0.3);
+    --accent-color: #6C63FF;
+    --hover-bg: #ffe066;
+    --shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+    --bg-gradient: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #0f2027);
+    --card-bg: rgba(30, 41, 59, 0.75);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --nav-bg: rgba(15, 23, 42, 0.6);
+    --accent-color: #a78bfa;
+    --hover-bg: #818cf8;
+    --shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    scroll-behavior: smooth;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+body {
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: bgGradient 15s ease infinite;
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+@keyframes bgGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating Navigation Bar */
+nav {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1000px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 1000;
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffe066;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: rotate(20deg) scale(1.1);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Hero Header Section */
+header {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+header h1 {
+    font-size: clamp(40px, 7vw, 68px);
+    font-weight: 800;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+header p.slogan {
+    font-size: clamp(16px, 3vw, 22px);
+    margin-top: 15px;
+    font-weight: 400;
+    opacity: 0.95;
+}
+
+header .badge {
+    margin-top: 20px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 25px;
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+}
+
+.btn-cta {
+    margin-top: 35px;
+    padding: 16px 40px;
+    border: none;
+    border-radius: 50px;
+    background: white;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.4s;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-cta:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: #ffe066;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* Container & Glassmorphism Cards */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: white;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 35px;
+    border-radius: 28px;
+    margin-bottom: 50px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--card-border);
+}
+
+/* Grid & Person Card */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.person {
+    padding: 22px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(116,235,213,0.3), rgba(159,172,230,0.3));
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.person:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: linear-gradient(135deg, rgba(116,235,213,0.6), rgba(159,172,230,0.6));
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.person i {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.person h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.person p {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.person-hint {
+    font-size: 11px;
+    margin-top: 8px;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* Tabel Piket Modern */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+th {
+    background: var(--accent-color);
+    color: white;
+    padding: 18px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+td {
+    padding: 16px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    color: var(--text-primary);
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+tr:hover {
+    background: rgba(108, 99, 255, 0.15);
+}
+
+/* Interactive Search Anggota */
+.search-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search {
+    width: 100%;
+    padding: 16px 25px 16px 50px;
+    border-radius: 50px;
+    border: 2px solid var(--accent-color);
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+    font-size: 18px;
+}
+
+.search-counter {
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: right;
+}
+
+.member-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.member {
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--card-border);
+    transition: 0.3s;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.member:hover {
+    background: var(--hover-bg);
+    color: #222;
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Modal Popup Profil */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+    z-index: 2000;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 24px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    transform: translateY(20px);
+    transition: 0.3s ease;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow);
+    color: var(--text-primary);
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+footer {
+    padding: 30px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    nav ul { display: none; }
+    .card { padding: 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <div class="logo"><i class="fa-solid fa-graduation-cap"></i> 9B CLASS</div>
+    <ul>
+        <li><a href="#wali" class="nav-link">Wali Kelas</a></li>
+        <li><a href="#organisasi" class="nav-link">Struktur</a></li>
+        <li><a href="#piket" class="nav-link">Piket</a></li>
+        <li><a href="#anggota" class="nav-link">Anggota</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" title="Ubah Tema"><i class="fa-solid fa-moon"></i></button>
+</nav>
+
+<!-- Hero Section -->
+<header>
+    <h1>🌈 WEBSITE KELAS 9B</h1>
+    <p class="slogan">Belajar Bersama📚 • Berkarya📖 • Berprestasi💪🏻</p>
+    <div class="badge">Satu Kelas, Sejuta Cerita 🤝🏻👥</div>
+
+    <button class="btn-cta" onclick="document.getElementById('organisasi').scrollIntoView()">
+        Eksplorasi Kelas <i class="fa-solid fa-arrow-down"></i>
+    </button>
+</header>
+
+<div class="container">
+
+    <!-- Wali Kelas -->
+    <h2 class="section-title" id="wali">👩🏻‍🏫 Wali Kelas</h2>
+    <div class="card">
+        <div class="person" style="max-width: 350px; margin: 0 auto;" onclick="showModal('Mrs Mar\'ah, S.Pd.', 'Wali Kelas 9B', 'Membimbing dan mengarahkan seluruh siswa-siswi kelas 9B menuju prestasi terbaik.')">
+            <i class="fa-solid fa-user-tie"></i>
+            <h2>Mrs Mar'ah, S.Pd.</h2>
+            <p>Wali Kelas 9B</p>
+            <div class="person-hint">Klik untuk info lengkap</div>
+        </div>
+    </div>
+
+    <!-- Struktur Organisasi Interaktif -->
+    <h2 class="section-title" id="organisasi">👥 Struktur Organisasi</h2>
+    <div class="card">
+        <div class="grid">
+            <div class="person" onclick="showModal('Ransi', 'Ketua Kelas', 'Memimpin dan menjaga ketertiban serta kekompakan kelas 9B.')">
+                <i class="fa-solid fa-crown"></i>
+                <h3>Ketua Kelas</h3>
+                <p>Ransi</p>
+                <div class="person-hint">Klik detail</div>
+            </div>
+            <div class="person" onclick="showModal('Vika', 'Wakil Ketua', 'Membantu ketua kelas dalam mengelola kegiatan dan kedisiplinan.')">
+                <i class="fa-solid fa-user-shield"></i>
+                <h3>Wakil Ketua</h3>
+                <p>Vika</p>
+                <div class="person-hint">Klik detail</div>
+            </div>
+            <div class="person" onclick="showModal('Gendis & Rahma', 'Sekretaris', 'Mencatat rekap presensi, jadwal pelajaran, dan administrasi kelas.')">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <h3>Sekretaris</h3>
+                <p>Gendis & Rahma</p>
+                <div class="person-hint">Klik detail</div>
+            </div>
+            <div class="person" onclick="showModal('Vanes & Agni', 'Bendahara', 'Mengelola keungan kas kelas secara transparan dan teratur.')">
+                <i class="fa-solid fa-wallet"></i>
+                <h3>Bendahara</h3>
+                <p>Vanes & Agni</p>
+                <div class="person-hint">Klik detail</div>
+            </div>
+            <div class="person" onclick="showModal('Kantata & Nizar', 'Seksi Keamanan', 'Menjaga kondusifitas lingkungan kelas saat KBM berlangsung.')">
+                <i class="fa-solid fa-lock"></i>
+                <h3>Keamanan</h3>
+                <p>Kantata & Nizar</p>
+                <div class="person-hint">Klik detail</div>
+            </div>
+            <div class="person" onclick="showModal('Najwa & Fildzah', 'Seksi Kebersihan', 'Coordinating pelaksanaan piket harian agar kelas selalu bersih.')">
+                <i class="fa-solid fa-broom"></i>
+                <h3>Kebersihan</h3>
+                <p>Najwa & Fildzah</p>
+                <div class="person-hint">Klik detail</div>
+            </div>
+            <div class="person" onclick="showModal('Farradila & Ipul', 'Seksi Kekeluargaan', 'Mempererat tali silaturahmi dan rasa kepedulian antarteman.')">
+                <i class="fa-solid fa-heart"></i>
+                <h3>Kekeluargaan</h3>
+                <p>Farradila & Ipul</p>
+                <div class="person-hint">Klik detail</div>
+            </div>
+            <div class="person" onclick="showModal('Tutut & Varda', 'Seksi Keagamaan', 'Pemandu dan koordinator kegiatan ibadah serta keagamaan kelas.')">
+                <i class="fa-solid fa-hands-praying"></i>
+                <h3>Keagamaan</h3>
+                <p>Tutut & Varda</p>
+                <div class="person-hint">Klik detail</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jadwal Piket -->
+    <h2 class="section-title" id="piket">🧹 Jadwal Piket</h2>
+    <div class="card">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hari</th>
+                        <th>Petugas Piket</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Senin</strong></td><td>Ransi, Irvan, Putri, Mutiara, Ami</td></tr>
+                    <tr><td><strong>Selasa</strong></td><td>Arief, Nizar, Farradila, Najwa, Tanaya</td></tr>
+                    <tr><td><strong>Rabu</strong></td><td>Elvan, Ipul, Fildzah, Nares, Tutut</td></tr>
+                    <tr><td><strong>Kamis</strong></td><td>Eza, Varda, Jihan, Nina, Vanessa</td></tr>
+                    <tr><td><strong>Jumat</strong></td><td>Obi, Agni, Kantata, Rahma, Vika</td></tr>
+                    <tr><td><strong>Sabtu</strong></td><td>Seno, Atiqa, Latisha, Gendis, Wulan</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Daftar Anggota Interaktif -->
+    <h2 class="section-title" id="anggota">👥 Daftar Anggota</h2>
+    <div class="card">
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" class="search" placeholder="Cari nama teman kamu..." id="search" onkeyup="cari()">
+        </div>
+        <div class="search-counter" id="counter">Menampilkan 30 Anggota</div>
+
+        <div class="member-list" id="memberList">
+            <span class="member">Elvan</span><span class="member">Ransi</span><span class="member">Eza</span>
+            <span class="member">Irvan</span><span class="member">Seno</span><span class="member">Arief</span>
+            <span class="member">Nizar</span><span class="member">Ipul</span><span class="member">Obi</span>
+            <span class="member">Varda</span><span class="member">Agni</span><span class="member">Vika</span>
+            <span class="member">Tutut</span><span class="member">Farradila</span><span class="member">Jihan</span>
+            <span class="member">Mutiara</span><span class="member">Putri</span><span class="member">Wulan</span>
+            <span class="member">Gendis</span><span class="member">Kantata</span><span class="member">Vanessa</span>
+            <span class="member">Rahma</span><span class="member">Latisha</span><span class="member">Tanaya</span>
+            <span class="member">Ami</span><span class="member">Nina</span><span class="member">Nares</span>
+            <span class="member">Najwa</span><span class="member">Atiqa</span><span class="member">Fildzah</span>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal Detail Profil -->
+<div class="modal" id="profileModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <i class="fa-solid fa-circle-user" style="font-size: 50px; color: var(--accent-color); margin-bottom: 15px;"></i>
+        <h2 id="modalName">Nama</h2>
+        <p id="modalRole" style="font-weight: 700; color: var(--accent-color); margin-bottom: 10px;">Jabatan</p>
+        <p id="modalDesc" style="font-size: 14px; opacity: 0.9;">Deskripsi tugas pengurus kelas.</p>
+    </div>
+</div>
+
+<footer>
+    © 2026 Website Resmi Kelas 9B • Modern Interactive Edition
+</footer>
+
+<script>
+// Toggle Theme (Dark / Light)
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.body.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+        document.body.removeAttribute('data-theme');
+        themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    } else {
+        document.body.setAttribute('data-theme', 'dark');
+        themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+});
+
+// Interactive Real-time Search Filter
+function cari() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let members = document.getElementsByClassName("member");
+    let visibleCount = 0;
+
+    for (let i = 0; i < members.length; i++) {
+        let nama = members[i].innerText.toLowerCase();
+        if (nama.includes(input)) {
+            members[i].style.display = "inline-block";
+            visibleCount++;
+        } else {
+            members[i].style.display = "none";
+        }
+    }
+    document.getElementById("counter").innerText = `Menampilkan ${visibleCount} Anggota`;
+}
+
+// Modal Interaction
+function showModal(name, role, desc) {
+    document.getElementById('modalName').innerText = name;
+    document.getElementById('modalRole').innerText = role;
+    document.getElementById('modalDesc').innerText = desc;
+    document.getElementById('profileModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('profileModal').classList.remove('active');
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('profileModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+// Scrollspy Navigation Highlight
+window.addEventListener('scroll', () => {
+    let current = '';
+    const sections = document.querySelectorAll('.section-title');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 150) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+            link.classList.add('active');
+        }
+    });
+});
+</script>
+
+</body>
+  </html>
+              
